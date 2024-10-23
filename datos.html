@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilocss.css">
+    <title>Visualizacion de datos</title>
+
+
+    <script>
+        function mostrarDatos() {
+            const xmlData = localStorage.getItem('usuarioXML');
+            if (xmlData) {
+
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlData, 'application/xml');
+                const nombre = xmlDoc.getElementsByTagName('name')[0].textContent;
+                const email = xmlDoc.getElementsByTagName('mail')[0].textContent;
+                const telefono = xmlDoc.getElementsByTagName('phone')[0].textContent;
+
+                document.getElementById('resultado').innerHTML = `<h2>Datos recibidos</h2>
+           <p><strong>Nombre: </strong>${name}</p>
+           <p><strong>Email: </strong>${mail}</p>
+            <p><strong>Telefono:</strong>${phone}</p>`;
+
+
+
+
+            } else {
+                document.getElementById('resultado').innerHTML = '<p>Sin datos en el almacen local</p>';
+            }
+        }
+
+    </script>
+</head>
+
+<body onload="mostrarDatos()">
+    <h1>Datos </h1>
+    <div id="resultado"></div>
+</body>
+
+</html>
